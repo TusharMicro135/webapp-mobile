@@ -1,0 +1,10 @@
+node_modules/
+android/.gradle/
+android/app/build/
+ios/Pods/
+*.log
+.DS_Store
+
+# Never commit local secrets or environment files.
+.env
+.env.*
