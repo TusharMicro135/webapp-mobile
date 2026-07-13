@@ -27,21 +27,25 @@ describe('LoginScreen', () => {
     login.mockReset();
   });
 
-  it('blocks empty and non-fixture input without making a request', () => {
+  it('blocks empty and non-fixture input without making a request', async () => {
     const screen = renderer.create(<LoginScreen />);
     const inputs = screen.root.findAllByType(TextInput);
 
-    act(() => {
+    await act(async () => {
       inputs[0].props.onChangeText('');
-      submitButton(screen).props.onPress();
+    });
+    await act(async () => {
+      await submitButton(screen).props.onPress();
     });
 
     expect(login).not.toHaveBeenCalled();
     expect(renderedText(screen)).toContain('Both fixture-only fields are required');
 
-    act(() => {
+    await act(async () => {
       inputs[0].props.onChangeText('not-a-fixture-value');
-      submitButton(screen).props.onPress();
+    });
+    await act(async () => {
+      await submitButton(screen).props.onPress();
     });
 
     expect(login).not.toHaveBeenCalled();
