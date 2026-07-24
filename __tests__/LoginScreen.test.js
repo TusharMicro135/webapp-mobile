@@ -24,8 +24,8 @@ describe('LoginScreen', () => {
   it('rejects non-placeholder values', () => {
     expect(
       validateFixtureCredentials({
-        username: 'fixture-user',
-        password: 'fixture-password',
+        username: 'placeholder-extra',
+        password: 'placeholder-extra',
       }),
     ).toBe(
       'Only fixture placeholder values are accepted. Never enter real credentials.',
@@ -46,10 +46,10 @@ describe('LoginScreen', () => {
     await act(async () => {
       screen.root
         .findByProps({testID: 'username-input'})
-        .props.onChangeText('placeholder-user');
+        .props.onChangeText('placeholder');
       screen.root
         .findByProps({testID: 'password-input'})
-        .props.onChangeText('placeholder-password');
+        .props.onChangeText('placeholder');
     });
 
     await act(async () => {
@@ -57,8 +57,8 @@ describe('LoginScreen', () => {
     });
 
     expect(login).toHaveBeenCalledWith({
-      username: 'placeholder-user',
-      password: 'placeholder-password',
+      username: 'placeholder',
+      password: 'placeholder',
     });
     expect(
       screen.root.findByProps({testID: 'login-status'}).props.children.props
@@ -77,10 +77,10 @@ describe('LoginScreen', () => {
     await act(async () => {
       screen.root
         .findByProps({testID: 'username-input'})
-        .props.onChangeText('placeholder-user');
+        .props.onChangeText('placeholder');
       screen.root
         .findByProps({testID: 'password-input'})
-        .props.onChangeText('placeholder-password');
+        .props.onChangeText('placeholder');
     });
 
     await act(async () => {
