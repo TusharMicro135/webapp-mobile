@@ -14,15 +14,19 @@ import {
 import {login} from '../api/auth';
 
 const INITIAL_STATE = 'initial';
+const PLACEHOLDER_INPUT = 'placeholder';
 
 export function validateFixtureCredentials({username, password}) {
-  if (!username.trim() || !password.trim()) {
+  const normalizedUsername = username.trim().toLowerCase();
+  const normalizedPassword = password.trim().toLowerCase();
+
+  if (!normalizedUsername || !normalizedPassword) {
     return 'Enter both placeholder fields before continuing.';
   }
 
   if (
-    !username.toLowerCase().includes('placeholder') ||
-    !password.toLowerCase().includes('placeholder')
+    normalizedUsername !== PLACEHOLDER_INPUT ||
+    normalizedPassword !== PLACEHOLDER_INPUT
   ) {
     return 'Only fixture placeholder values are accepted. Never enter real credentials.';
   }
@@ -52,8 +56,8 @@ export default function LoginScreen() {
 
     try {
       const result = await login({
-        username: username.trim(),
-        password,
+        username: username.trim().toLowerCase(),
+        password: password.trim().toLowerCase(),
       });
 
       if (!result || result.fixture !== 'dummy-placeholder') {
@@ -102,7 +106,7 @@ export default function LoginScreen() {
               autoCorrect={false}
               editable={!isLoading}
               onChangeText={setUsername}
-              placeholder="placeholder-user"
+              placeholder="Type placeholder"
               placeholderTextColor="#64748B"
               style={styles.input}
               testID="username-input"
@@ -116,7 +120,7 @@ export default function LoginScreen() {
               autoCorrect={false}
               editable={!isLoading}
               onChangeText={setPassword}
-              placeholder="placeholder-password"
+              placeholder="Type placeholder"
               placeholderTextColor="#64748B"
               secureTextEntry
               style={styles.input}
