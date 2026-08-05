@@ -63,7 +63,7 @@ export default function LoginScreen({loginRequest = login}) {
       }
 
       setPhase('success');
-      setMessage('Fixture login completed successfully.');
+      setMessage(result.fixture);
     } catch (_error) {
       setPhase('error');
       setMessage(
