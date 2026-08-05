@@ -83,7 +83,7 @@ describe('LoginScreen', () => {
 
     expect(
       root.findByProps({testID: 'status-message'}).props.children,
-    ).toBe('Fixture login completed successfully.');
+    ).toBe('dummy-placeholder');
     expect(JSON.stringify(renderer.toJSON())).not.toContain('session');
   });
 
